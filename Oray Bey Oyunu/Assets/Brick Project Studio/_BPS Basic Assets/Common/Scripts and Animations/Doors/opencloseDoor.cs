@@ -17,55 +17,32 @@ namespace SojaExiles
 			open = false;
 		}
 
-		void OnMouseOver()
-		{
-			{
-				if (Player)
+        private void OnTriggerEnter(Collider other)
+        {
+			if (other.CompareTag("Player"))
+            {
+				
+				
+				if (open == false)
 				{
-					float dist = Vector3.Distance(Player.position, transform.position);
-					if (dist < 15)
-					{
-						if (open == false)
-						{
-							if (Input.GetMouseButtonDown(0))
-							{
-								StartCoroutine(opening());
-							}
-						}
-						else
-						{
-							if (open == true)
-							{
-								if (Input.GetMouseButtonDown(0))
-								{
-									StartCoroutine(closing());
-								}
-							}
-
-						}
-
-					}
+						
+					StartCoroutine(opening());
+							
 				}
-
+				
 			}
+
+		
 
 		}
 
 		IEnumerator opening()
 		{
-			print("you are opening the door");
 			openandclose.Play("Opening");
 			open = true;
-			yield return new WaitForSeconds(.5f);
-		}
+            yield return new WaitForSeconds(.5f);
+        }
 
-		IEnumerator closing()
-		{
-			print("you are closing the door");
-			openandclose.Play("Closing");
-			open = false;
-			yield return new WaitForSeconds(.5f);
-		}
 
 
 	}
