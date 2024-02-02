@@ -369,8 +369,10 @@
 "Assets/Final Form Studio/Cliff-scene/Scripts/SimpleCameraController.cs"
 "Assets/Low Poly Guns/Scripts/GunsMenu.cs"
 "Assets/Low Poly Guns/Scripts/GunView.cs"
+"Assets/Scripts/Pistol.cs"
 "Assets/Scripts/PlayerController.cs"
 "Assets/Scripts/ThirdPersonCamera.cs"
+"Assets/Scripts/Weapon.cs"
 -langversion:9.0
 
 /deterministic
