@@ -367,6 +367,9 @@
 "Assets/Brick Project Studio/_BPS Basic Assets/Common/Scripts and Animations/Windows/opencloseWindow.cs"
 "Assets/Brick Project Studio/_BPS Basic Assets/Common/Scripts and Animations/Windows/opencloseWindow1.cs"
 "Assets/Final Form Studio/Cliff-scene/Scripts/SimpleCameraController.cs"
+"Assets/Low Poly Guns/Scripts/GunsMenu.cs"
+"Assets/Low Poly Guns/Scripts/GunView.cs"
+"Assets/Scripts/PlayerController.cs"
 "Assets/Scripts/ThirdPersonCamera.cs"
 -langversion:9.0
 
