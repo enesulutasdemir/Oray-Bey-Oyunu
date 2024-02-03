@@ -22,6 +22,11 @@ public class Pistol : Weapon
         if (Physics.Raycast(ray, out hit))
         {
             GameObject gameBullet = Instantiate(particle, hit.point, hit.transform.rotation);
+            if (hit.collider.CompareTag("enemy"))
+            {
+                // 10 sayýsýný istediðiz þekilde deðiþtirebilirsiniz bir merminin vereceði zararý belirtiyor
+                hit.collider.gameObject.GetComponent<Enemy>().ChangeHealth(10);
+            }
             Destroy(gameBullet, 1);
         }
     }

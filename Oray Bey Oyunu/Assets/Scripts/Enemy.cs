@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour
             // düþmanýn colliderýný deaktive edelim
             GetComponent<Collider>().enabled = false;
             // ölüm animasyonunu aktive edelim
-            anim.SetBool("Die", true);
+            Destroy(gameObject);
         }
     }
 }

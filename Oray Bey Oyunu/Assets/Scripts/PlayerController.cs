@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
         if (health <= 0)
         {
             //bir þeyler olacak
-            anim.SetBool("Die", true);
+            Destroy(gameObject);
             this.enabled = false;
         }
     }
