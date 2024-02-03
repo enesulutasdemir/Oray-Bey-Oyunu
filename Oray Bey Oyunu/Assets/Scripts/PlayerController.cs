@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 5f;
@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     Vector3 direction;
     private int health;
     [SerializeField] Animator anim;
+    [SerializeField] Image cusror;
     // Start is called before the first frame update
     void Start()
     {

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class Weapon : MonoBehaviour
 {
     [SerializeField] protected GameObject particle;
@@ -12,6 +12,13 @@ public class Weapon : MonoBehaviour
     //Atýþlar arasýndaki aralýk ve süreyi sayan zamanlayýcý
     protected float cooldown = 0;
     protected float timer = 0;
+    protected int ammoCurrent;
+    //þarjörün maksimum kapasitesi
+    protected int ammoMax;
+    //yedekteki mermi miktarý
+    protected int ammoBackPack;
+    //arayüzde gözükecek yazý için bir deðiþken
+    [SerializeField] TMP_Text ammoText;
     // Start is called before the first frame update
     private void Start()
     {
@@ -26,6 +33,17 @@ public class Weapon : MonoBehaviour
         {
             Shoot();
         }
+        AmmoTextUpdate();
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            //þarjörümüz dolu deðilse VEYA yedekte en az bir mermimiz varsa
+            if (ammoCurrent != ammoMax || ammoBackPack != 0)
+            {
+                ///yeniden yükleme iþlevinin hafif bir gecikmeyle etkinleþtirilmesi
+                //gecikmeyi istediðiniz herhangi bir sayýya ayarlayabilirsiniz
+                Invoke("Reload", 1);
+            }
+        }
     }
     //Silahýn ateþlenip ateþlenemeyeceðinin kontrol edilmesi
     public void Shoot()
@@ -34,8 +52,12 @@ public class Weapon : MonoBehaviour
         {
             if (timer > cooldown)
             {
-                OnShoot();
-                timer = 0;
+                if (ammoCurrent > 0)
+                {
+                    OnShoot();
+                    timer = 0;
+                    ammoCurrent = ammoCurrent - 1;
+                }
             }
         }
     }
@@ -43,5 +65,30 @@ public class Weapon : MonoBehaviour
     // bundan beslenen sýnýflar kendi atýþ mantýklarýný tanýmlayabileceklerdir
     protected virtual void OnShoot()
     {
+    }
+    private void AmmoTextUpdate()
+    {
+        ammoText.text = ammoCurrent + " / " + ammoBackPack;
+    }
+    private void Reload()
+    {
+        //bir deðiþken tanýmlamak ve þarjöre eklememiz gereken mermi sayýsýný hesaplamak
+        int ammoNeed = ammoMax - ammoCurrent;
+        //Elimizdeki yedek mermi miktarý, yeniden doldurmak için gereken mermi miktarýna eþit veya daha fazla ise
+        if (ammoBackPack >= ammoNeed)
+        {
+            //Ýhtiyaç duyulan mermi sayýsýnýn yedeklerden çýkarýlmasý
+            ammoBackPack -= ammoNeed;
+            //þarjöre gerekli sayýda mermi eklemek
+            ammoCurrent += ammoNeed;
+        }
+        //aksi takdirde ( yedeklerde tam bir yeniden doldurma için gerekenden daha az mermi varsa)
+        else
+        {
+            //tüm yedek cephanemizi þarjöre ekleyemek
+            ammoCurrent += ammoBackPack;
+            //yedek cephaneyi 0'a ayarlama
+            ammoBackPack = 0;
+        }
     }
 }

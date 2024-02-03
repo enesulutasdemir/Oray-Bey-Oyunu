@@ -10,6 +10,9 @@ public class Pistol : Weapon
         cooldown = 0;
         //Bu otomatik bir silah deðil, yani her ateþ etmek istediðimizde ateþ düðmesine týklamamýz gerekiyor
         auto = false;
+        ammoCurrent = 20;
+        ammoMax = 20;
+        ammoBackPack = 60;
     }
     protected override void OnShoot()
     {
