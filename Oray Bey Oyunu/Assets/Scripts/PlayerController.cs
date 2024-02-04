@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private int health;
     [SerializeField] Animator anim;
     [SerializeField] Image cusror;
+    [SerializeField] AudioSource characterSounds;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +27,18 @@ public class PlayerController : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
         direction = new Vector3(moveHorizontal, 0.0f, moveVertical);
         direction = transform.TransformDirection(direction);
+        if(direction.x !=0 || direction.z != 0)
+        {
+            if (!characterSounds.isPlaying)
+            {
+                // Sesi oynatma kýsmý
+                characterSounds.Play();
+            }
+        }
+        if(direction.x ==0 && direction.z == 0)
+        {
+            characterSounds.Stop();
+        }
     }
     void FixedUpdate()
     {

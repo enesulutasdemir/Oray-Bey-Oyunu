@@ -19,6 +19,8 @@ public class Weapon : MonoBehaviour
     protected int ammoBackPack;
     //arayüzde gözükecek yazý için bir deðiþken
     [SerializeField] TMP_Text ammoText;
+    [SerializeField] AudioSource shoot;
+    [SerializeField] AudioClip bulletSound, noBulletSound, reload;
     // Start is called before the first frame update
     private void Start()
     {
@@ -41,6 +43,7 @@ public class Weapon : MonoBehaviour
             {
                 ///yeniden yükleme iþlevinin hafif bir gecikmeyle etkinleþtirilmesi
                 //gecikmeyi istediðiniz herhangi bir sayýya ayarlayabilirsiniz
+                shoot.PlayOneShot(reload);
                 Invoke("Reload", 1);
             }
         }
@@ -57,6 +60,12 @@ public class Weapon : MonoBehaviour
                     OnShoot();
                     timer = 0;
                     ammoCurrent = ammoCurrent - 1;
+                    shoot.PlayOneShot(bulletSound);
+                    shoot.pitch = Random.Range(1f, 1.5f);
+                }
+                else
+                {
+                    shoot.PlayOneShot(noBulletSound);
                 }
             }
         }
