@@ -18,8 +18,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         currentSpeed = movementSpeed;
         health = 100;
+        Can();
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -39,6 +39,10 @@ public class PlayerController : MonoBehaviour
         {
             characterSounds.Stop();
         }
+        if (health > 100)
+        {
+            health = 100;
+        }
     }
     void FixedUpdate()
     {
@@ -55,5 +59,10 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
             this.enabled = false;
         }
+    }
+    void Can()
+    {
+        health += 1;
+        Invoke("Can", 1);
     }
 }
